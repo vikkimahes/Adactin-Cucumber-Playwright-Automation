@@ -1,4 +1,4 @@
-name: Playwright + Cucumber Tests
+name: Playwright Tests
 
 on:
   push:
@@ -12,61 +12,27 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    # ✅ Checkout code
-    - name: Checkout repository
-      uses: actions/checkout@v4
+    - uses: actions/checkout@v4
 
-    # ✅ Setup Node
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
+    - uses: actions/setup-node@v4
       with:
         node-version: lts/*
 
-    # ✅ Install dependencies
     - name: Install dependencies
       run: npm ci
 
-    # 🚀 Cache Playwright browsers (SPEED BOOST)
-    - name: Cache Playwright browsers
-      uses: actions/cache@v4
-      with:
-        path: ~/.cache/ms-playwright
-        key: ${{ runner.os }}-playwright-${{ hashFiles('package-lock.json') }}
-
-    # ✅ Install only Chromium (faster)
     - name: Install Playwright Browsers
-      run: npx playwright install chromium
+      run: npx playwright install --with-deps
 
-    # 🔍 DEBUG: Check project structure
-    - name: Debug project structure
-      run: |
-        echo "===== ROOT FILES ====="
-        ls -R
-        echo "===== FEATURES ====="
-        ls tests/feature || echo "No feature folder found"
-        echo "===== STEP DEFINITIONS ====="
-        ls tests/stepDef || echo "No stepDef folder found"
-
-    # 🔍 DEBUG: Check cucumber config
-    - name: Debug cucumber config
-      run: |
-        echo "===== cucumber.js ====="
-        cat cucumber.js
-
-    # 🔍 Run Cucumber with detailed logs
     - name: Run Cucumber tests
-      run: |
-        echo "===== RUNNING CUCUMBER ====="
-        npx cucumber-js --format progress --format summary
+      run: npx cucumber-js
 
-    # 📊 Upload reports (even if failed)
-    - name: Upload Reports
+    - name: Upload Report
       uses: actions/upload-artifact@v4
-      if: always()
+      if: ${{ !cancelled() }}
       with:
-        name: test-reports
+        name: test-report
         path: |
-          allure-results/
           allure-report/
           playwright-report/
         retention-days: 30
