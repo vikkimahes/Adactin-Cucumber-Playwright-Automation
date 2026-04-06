@@ -15,7 +15,7 @@ class LoginPage {
     await this.userName.fill("vikkimahes");
   }
   async password1() {
-    await this.password.fill("Y46370");
+    await this.password.fill("H38T1A");
   }
   async loginButton1() {
     await this.loginButton.click();
