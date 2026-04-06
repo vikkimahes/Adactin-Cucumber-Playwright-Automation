@@ -1,6 +1,0 @@
-"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
-"","5822","To test login page using valid credentials","","2026-03-19","passed","2026-03-19","","","",""
-"","3316","To test login page using invalid credentials","","2026-03-19","passed","2026-03-19","","","",""
-"","3063","To test login page using invalid credentials","","2026-03-19","passed","2026-03-19","","","",""
-"","2945","To test login page using invalid credentials","","2026-03-19","passed","2026-03-19","","","",""
-"","3798","Search hotel with valid details","","2026-03-19","passed","2026-03-19","","","",""
